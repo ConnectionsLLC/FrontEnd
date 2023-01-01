@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, StyleSheet, Image } from 'react-native'
 import React, {useState} from 'react'
-
+import { Ionicons } from '@expo/vector-icons';
 const Stories = () => {
     const [data, setData] = useState([
         {"Name": "Elon Musk", "lowerUsername" : '@elonmusk', "profile": "https://www.howitworksdaily.com/wp-content/uploads/2016/04/elonmusk.jpg" },
@@ -13,19 +13,21 @@ const Stories = () => {
     ])
   return (
      <View>
-         <View style={{ marginBottom: 13,marginTop: 10, marginLeft: 5 }}>
+         <View style={{ marginBottom: 13,marginTop: 10, marginLeft: 5,  }}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-
+          <View style={{marginLeft: 4, marginRight: 4,  width: 54, height: 54, backgroundColor: '#D4E4F4', borderRadius: 50, alignItems: "center", justifyContent: "center", alignItems: 'center' }}>
+          <Ionicons name="add" size={30} color="#0078E9" style={{marginLeft:2}}/>
+          </View>
             
             {data?.map(info => {
                  return(
                     <View style={{ alignItems: 'center', }} key={info.id}>
-                    <View style={{ marginLeft: 2, marginRight: 2 }}>
-                        <View style={{ width: 58, height: 58, backgroundColor: 'white', borderRadius: 50, alignItems: "center", justifyContent: "center", borderWidth: 2, borderColor: "black", }}>
+                    <View style={{ marginLeft: 6, marginRight: 6 }}>
+                        <View style={{ width: 54, height: 54, backgroundColor: 'white', borderRadius: 50, alignItems: "center", justifyContent: "center", borderWidth: 2, borderColor: "black", }}>
                             <Image style={styles.story} source={{ uri: info?.profile }} />
   
                         </View>
-                        <Text>{info.lowerUsername.length > 6 ?  info.lowerUsername.slice(0, 6) + '...' : "Elon Musk".toLowerCase()}</Text>
+                        {/* <Text>{info.lowerUsername.length > 6 ?  info.lowerUsername.slice(0, 6) + '...' : "Elon Musk".toLowerCase()}</Text> */}
                     </View>
                 </View>
                  )
