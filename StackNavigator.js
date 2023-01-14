@@ -23,11 +23,6 @@ const StackNavigator = () => {
   const { user } = useAuth()
   const navigation = useNavigation()
   
-
- 
-        
-    
-  
   
   return (
 
@@ -37,15 +32,13 @@ const StackNavigator = () => {
       screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
-        // tabBarBackground: () => (
-        //   <BlurView tint="light" intensity={300} style={StyleSheet.absoluteFill} />
-        // ),
+        
         
         
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           let iconColor;
-         
+          
           if (route.name === 'Home') {
 
             iconName = focused

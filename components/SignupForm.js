@@ -27,7 +27,8 @@ const SignupForm = ({ navigation }) => {
             username: username, 
             email: authUser.user.email, 
             profile_picture: 'https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg',
-            lowerUsername: "@"+username.replace(/\s+/g, '').toLowerCase()
+            lowerUsername: "@"+username.replace(/\s+/g, '').toLowerCase(), 
+            about: 'Hey there I am using Social',
             })
           } catch(error) {
         console.log(error.message)

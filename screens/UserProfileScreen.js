@@ -91,23 +91,23 @@ setFollowing(snapshot.docs)), [firebase,email]
             flexDirection: "row",
             alignItems: "center",
             margin: 8,
-            borderWidth: 2,
-            borderColor: "white",
-            borderRadius: 20,
+            // borderWidth: 2,
+            // borderColor: "white",
+            // borderRadius: 20,
             padding: 4,
             alignItems: "center",
           }}
         >
           <Ionicons name="arrow-back" size={24} color="white" />
-          <Text style={{ fontSize: 18, color: "white" }}>{username}</Text>
+          <Text style={{ fontSize: 18, color: "white", marginLeft: 4 }}>{username}</Text>
         </TouchableOpacity>
       </View>
       <View>
         <View>
           <Image
-            style={{ alignSelf: "stretch", height: 200, marginBottom: 8 }}
+            style={{ alignSelf: "stretch", height: 200, marginBottom: 8, backgroundColor: 'blue' }}
             source={{
-              uri: "https://images.unsplash.com/photo-1605379399642-870262d3d051?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80",
+              uri: "https://pbs.twimg.com/profile_banners/44196397/1576183471/600x200",
             }}
           />
 
@@ -145,31 +145,19 @@ setFollowing(snapshot.docs)), [firebase,email]
               </Text>
             )}
 
-            {hasFollowed ? (
-              <Pressable
-                style={{
-                  borderWidth: 1,
-                  borderRadius: 16,
-                  padding: 6,
-                  fontWeight: "600",
-                }}
-                onPress={followUser}
-              >
-                <Text>Following</Text>
-              </Pressable>
-            ) : (
-              <Pressable
-                style={{
-                  borderWidth: 1,
-                  borderRadius: 16,
-                  padding: 6,
-                  fontWeight: "600",
-                }}
-                onPress={followUser}
-              >
-                <Text>Follow</Text>
-              </Pressable>
-            )}
+            {user.uid!=uid && (
+             <Pressable
+             style={{
+               borderWidth: 1,
+               borderRadius: 16,
+               padding: 6,
+               fontWeight: "600",
+             }}
+             onPress={followUser}
+           >
+             <Text>{ hasFollowed ? 'Following' : "Follow"}</Text>
+           </Pressable>
+             )}
           </View>
         </View>
         <View
@@ -180,8 +168,11 @@ setFollowing(snapshot.docs)), [firebase,email]
           }}
         >
           <View style={{ marginLeft: 20 }}>
-            <Text style={{ fontSize: 20, fontWeight: "600" }}>{username}</Text>
-            <Text style={{ fontSize: 13, fontWeight: "300" }}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{username}</Text>
+                  <Image style={{ width: 20, height: 20, marginLeft: 2,bottom: -2 }} source={{ uri: 'https://th.bing.com/th/id/OIP.Qq0Ov_N_BiXjTfZA3EriXQHaHa?pid=ImgDet&rs=1' }} />
+                  </View>
+            <Text style={{ fontSize: 12, fontWeight: "200", top:-4, color: 'grey' }}>
               {lowerUsername}
             </Text>
             <Text>The chief and the developer of this application </Text>
@@ -203,11 +194,11 @@ setFollowing(snapshot.docs)), [firebase,email]
               style={{ marginTop: 10, marginBottom: 10, flexDirection: "row" }}
             >
               <View style={{ flexDirection: "row", marginRight: 4 }}>
-                <Text style={{ fontWeight: "600", marginRight: 2 }}>{followers.length}</Text>
+                <Text style={{ fontWeight: "bold", marginRight: 2,  }}>{followers.length}</Text>
                 <Text>Followers</Text>
               </View>
               <View style={{ flexDirection: "row" }}>
-                <Text style={{ fontWeight: "600", marginRight: 2 }}>{following.length}</Text>
+                <Text style={{ fontWeight: "bold", marginRight: 2 }}>{following.length}</Text>
                 <Text>Following</Text>
               </View>
             </View>

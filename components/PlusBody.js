@@ -85,7 +85,7 @@ navigation.goBack()
 
   return (
     
-    <View  style={{backgroundColor: 'white',}}>
+    <View  style={{marginTop: 4}}>
       <View style={styles.container1}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="black" />
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     marginHorizontal: 20,
-    marginBottom: 10,
+
 
   },
   button: {

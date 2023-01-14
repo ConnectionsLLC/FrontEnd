@@ -30,6 +30,7 @@ const Post = ({ post }) => {
   const [followers, setFollowers] = useState([])
   const [following, setFollowing] = useState([])
 
+  
 
   onSnapshot(
     query(
@@ -37,12 +38,15 @@ const Post = ({ post }) => {
       where("owner_uid", "==", user.uid)
     ),
     (snapshot) => {
-      setUserInfo(snapshot.docs.map(info => ({ id: info.id, ...info.data() })));
+      setUserInfo(snapshot.docs);
     }
   );
 
   const handleLike = (post) => {
-    const currentLikeStatus = !post.likes_by_users.includes(user.email);
+      const currentLikeStatus = !post.likes_by_users.map(like => like.email).includes(user.email);
+      const profile = userInfo.map(info => info.data().profile_picture).pop()
+      const username = userInfo.map(info => info.data().username).pop()
+   
     firebase
       .firestore()
       .collection("users")
@@ -51,15 +55,11 @@ const Post = ({ post }) => {
       .doc(post.id)
       .update({
         likes_by_users: currentLikeStatus
-          ? firebase.firestore.FieldValue.arrayUnion(user.email)
-          : firebase.firestore.FieldValue.arrayRemove(user.email),
+          ? firebase.firestore.FieldValue.arrayUnion({email: user.email , profile: profile, username: username})
+          : firebase.firestore.FieldValue.arrayRemove({email: user.email, profile: profile, username: username}),
       })
-      .then(() => {
-        console.log("document updated!");
-      })
-      .catch((e) => {
-        console.error("Failed Updating DOcs", e);
-      });
+      
+  
   };
 
   const handleSubmit = async () => {
@@ -100,13 +100,11 @@ const Post = ({ post }) => {
           </View>
         </View>
       </Modal>
-      <View style={{ margin: 6, backgroundColor: '#F9FFFF', borderRadius: 12, }}>
-        {/* <Divider width={1} orientaion="vertical"/> */}
-
-
+      <View style={{ margin: 5, borderRadius: 12, backgroundColor: '#F4F4F4' }}>
+        {/* background #F9FFFF was used previously */}
 
         <PostHeader post={post} navigation={navigation} userInfo={userInfo} />
-        <PostBody post={post} />
+        <PostBody post={post} navigation={navigation} user={user}/>
         <PostFooter
           post={post}
           handleLike={handleLike}
@@ -154,7 +152,7 @@ const PostHeader = ({ post, navigation, follower, following, userInfo }) => (
         </Text>
         <View style={{ flexDirection: "row", alignItems: 'center' }}>
 
-          <Text style={{ marginLeft: 6, fontSize: 11, fontWeight: '200' }}>10 mins ago</Text>
+          <Text style={{ marginLeft: 6, fontSize: 11, fontWeight: '400' }}>10 mins ago</Text>
         </View>
       </View>
     </View>
@@ -163,8 +161,13 @@ const PostHeader = ({ post, navigation, follower, following, userInfo }) => (
     </View>
   </View>
 );
-const PostBody = ({ post }) => (
-  <View>
+const PostBody = ({ post, navigation, user }) => (
+ <TouchableOpacity onPress={() => navigation.push("UserPost", {
+  username: post.username, 
+ 
+  post: post
+ })}>
+   <View >
     <View
       style={{
         marginLeft: 15,
@@ -201,21 +204,43 @@ const PostBody = ({ post }) => (
         alignItems: 'center'
       }}
     >
-      <Image
-        style={{ width: 32, height: 32, borderRadius: 50, margin: 4, }}
-        source={{ uri: "https://compote.slate.com/images/59210cce-a982-468f-9979-d456b2909f0a.jpg" }}
+      
+      
+{post.likes_by_users.length > 0 &&(
+          <Image
+          style={{ width: 28, height: 28, borderRadius: 50, margin: 4, }}
+          source={{ uri: post.likes_by_users.slice(-1)[0]?.profile}}
+        />
+  
+)}      
+      {post.likes_by_users.length > 1 &&(
+        <Image
+        style={{ width: 28, height: 28, borderRadius: 50, margin: 4, left: -16 }}
+        source={{ uri: post.likes_by_users.slice(-2)[0]?.profile }}
       />
-      <Image
-        style={{ width: 32, height: 32, borderRadius: 50, margin: 4, left: -16 }}
-        source={{ uri: "https://www.howitworksdaily.com/wp-content/uploads/2016/04/elonmusk.jpg" }}
-      />
-      <Image
-        style={{ width: 32, height: 32, borderRadius: 50, margin: 4, left: -32 }}
-        source={{ uri: post.profilePicture }}
-      />
-      <Text style={{ left: -32, color: '#A9A9A9' }}>Bill Gates and others likes it.</Text>
+      )}
+    
+      {post.likes_by_users.length > 2 &&(
+         <Image
+       style={{ width: 32, height: 32, borderRadius: 50, margin: 4, left: -32 }}
+       source={{ uri: post.likes_by_users.slice(-3)[0]?.profile }}
+     />
+      )}
+     
+
+      {post.likes_by_users.length == 1 &&(
+        <Text style={{ color: '#A9A9A9' }}>{ post.likes_by_users.slice(-1)[0].email == user.email ? "You Liked It! " : post.likes_by_users.slice(-1)[0].username} </Text>
+      )}
+       {post.likes_by_users.length == 2 &&(
+        <Text style={{left: -18, color: '#A9A9A9' }}>{post.likes_by_users.slice(-2)[0].username}  and others likes it.</Text>
+      )}
+       {post.likes_by_users.length >= 3 &&(
+        <Text style={{left: -32, color: '#A9A9A9' }}>{post.likes_by_users.slice(-3)[0].username}  and others likes it.</Text>
+      )}
     </View>
+
   </View>
+ </TouchableOpacity>
 );
 const PostFooter = ({
   post,
@@ -234,32 +259,32 @@ const PostFooter = ({
       style={{
         flexDirection: "row",
         alignItems: 'center',
-        marginLeft: 18,
-        marginRight: 18,
+        marginLeft: 8,
+        marginRight: 8,
 
       }}
     >
       <TouchableOpacity
-        style={{ flexDirection: "row", backgroundColor: '#FFEEEE', borderRadius: 4, padding: 4}}
+        style={{ flexDirection: "row", borderRadius: 4,padding: 2, }}
         onPress={() => handleLike(post)}
       >
-        {post.likes_by_users.includes(user.email) ? (
-          <Ionicons name="heart" size={22} color="red" />
+        {post.likes_by_users.map(like => like.email).includes(user.email) ? (
+          <Ionicons name="heart" size={21} color="red" />
         ) : (
-          <Ionicons name="heart-outline" size={22} color="black" />
+          <Ionicons name="heart-outline" size={21} color="black" />
         )}
         <Text style={{ marginLeft: 6, fontSize: 16, marginRight: 6 }}>
-          {post.likes_by_users.length} {post.likes_by_users.length > 1 ? 'Likes' : 'Like' }
+          {post.likes_by_users.length} {post.likes_by_users.length != 1 ? 'Likes' : 'Like' }
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={{ flexDirection: "row", marginLeft: 12, padding: 4, backgroundColor: '#EBF5FF', borderRadius: 4 }}
+        style={{ flexDirection: "row", marginLeft: 12, padding: 4, borderRadius: 4 }}
         onPress={() =>
           comments == true ? setComments(false) : setComments(true)
         }
       >
-        <Ionicons name="chatbubble-outline" size={22} color="black" />
+        <Ionicons name="chatbubble-outline" size={21} color="black" />
         <Text style={{ marginLeft: 4, fontSize: 16 }}>{post.comments.length} {post.comments.length === 1 ? "Comment" : "Comments" }</Text>
       </TouchableOpacity>
       {/* <TouchableOpacity style={{ flexDirection: "row" }} onPress={() => { setReplyModal(true); setPostInfo(post)}}>

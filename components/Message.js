@@ -58,15 +58,18 @@ const Message = () => {
           
         </ScrollView>
       </View>
-      <View style={{ flexDirection: 'row', alignItems: 'center', padding: 7, marginTop: 3,}}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', padding: 9, marginTop: 3,borderTopWidth: 1, borderTopColor: 'grey'}}>
         <TouchableOpacity>
-          <Feather name="smile" size={22} color="black" />
+          <Feather name="smile" size={22} color="grey" />
         </TouchableOpacity>
-        <TouchableOpacity style={{ marginLeft: 4 }}>
-          <Feather name="paperclip" size={22} color="black" />
+        
+        <TextInput placeholder="Say Something...." style={{ flex: 1, marginRight: 6, marginLeft: 6 }} />
+        <TouchableOpacity style={{ marginRight: 4 }}>
+          <Feather name="paperclip" size={22} color="grey" />
         </TouchableOpacity>
-        <TextInput placeholder="Say Something...." style={{ flex: 1, marginLeft: 8, marginRight: 8 }} />
-        <Feather name="send" size={22} color="black" onPress={() => handleSubmit(postInfo, text, onChangeText)} />
+        <TouchableOpacity>
+        <Feather name="send" size={22} color="grey"  />
+        </TouchableOpacity>
       </View>
     </View>
   )

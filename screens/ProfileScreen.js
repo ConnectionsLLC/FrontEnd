@@ -32,21 +32,24 @@ setFollowing(snapshot.docs)), [firebase, user]
 )
     return (
       <View style={{ flex: 1, backgroundColor: 'white'}}>
-      <Header />
+      {/* <Header /> */}
         <View>
           <View>
-            <Image style={{ alignSelf: "stretch", height: 200, marginBottom: 8 }} source={{ uri: 'https://images.unsplash.com/photo-1605379399642-870262d3d051?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80' }} />
+            <Image style={{ alignSelf: "stretch", height: 200, marginBottom: 8 }} source={{ uri: 'https://pbs.twimg.com/profile_banners/44196397/1576183471/600x200' }} />
 
             {userInfo?.map(info => {
               return (
-                <Image key={info.id} style={{ width: 100, height: 100, borderRadius: 100, top: 150, position: 'absolute', zIndex: 999, left: 15 }} source={{ uri: info.data().profile_picture }} />
-              )
+                <><Image key={info.id} style={{ width: 100, height: 100, borderRadius: 100, top: 150, position: 'absolute', zIndex: 999, left: 15 }} source={{ uri: info.data().profile_picture }} /><View style={{ flexDirection: "row", justifyContent: "flex-end", marginRight: 12 }}>
+
+                  <Text key={info.id} style={{ borderWidth: 1, borderRadius: 16, padding: 6, fontWeight: '600', }} onPress={() => navigation.navigate("EditProfile", {
+                    lastUsername: info.data().username,
+                    lastAbout: info.data().about
+                  })}>Edit Profile</Text>
+                </View></>
+                )
             })}
 
-            <View style={{ flexDirection: "row", justifyContent: "flex-end", marginRight: 12 }}>
-
-              <Text style={{ borderWidth: 1, borderRadius: 16, padding: 6, fontWeight: '600', }} onPress={() => navigation.navigate("EditProfile")}>Edit Profile</Text>
-            </View>
+      
 
 
           </View>
@@ -55,9 +58,12 @@ setFollowing(snapshot.docs)), [firebase, user]
             {userInfo?.map(info => {
               return (
                 <View style={{ marginLeft: 20,  }} key={info.id}>
-                  <Text style={{ fontSize: 20, fontWeight: '600' }}>{info.data().username}</Text>
-                  <Text style={{ fontSize: 13, fontWeight: '300' }}>{info.data().lowerUsername}</Text>
-                  <Text>The chief and the developer of this application </Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{info.data().username}</Text>
+                  <Image style={{ width: 20, height: 20, marginLeft: 2,bottom: -2 }} source={{ uri: 'https://th.bing.com/th/id/OIP.Qq0Ov_N_BiXjTfZA3EriXQHaHa?pid=ImgDet&rs=1' }} />
+                  </View>
+                  <Text style={{ fontSize: 12, fontWeight: '200', top: -4, color: 'grey' }}>{info.data().lowerUsername}</Text>
+                  <Text>{info.data().about} </Text>
 
                   {/* <View style={{ marginTop: 10, flexDirection: 'row' }}>
                     <Ionicons name="ios-location-sharp" size={24} color="black" />
@@ -71,11 +77,11 @@ setFollowing(snapshot.docs)), [firebase, user]
 
                   <View style={{ marginTop: 10,marginBottom: 10, flexDirection: 'row' }}>
                     <View style={{ flexDirection: 'row', marginRight: 4 }}>
-                      <Text style={{ fontWeight: "600", marginRight: 2 }}>{followers.length}</Text>
+                      <Text style={{ fontWeight: "bold", marginRight: 2 }}>{followers.length}</Text>
                       <Text>Followers</Text>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
-                      <Text style={{ fontWeight: "600", marginRight: 2 }}>{following.length}</Text>
+                      <Text style={{ fontWeight: "bold", marginRight: 2 }}>{following.length}</Text>
                       <Text>Following</Text>
                     </View>
                   </View>
