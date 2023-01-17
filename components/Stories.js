@@ -12,8 +12,8 @@ const Stories = () => {
         
     ])
   return (
-     <View>
-         <View style={{ marginBottom: 13,marginTop: 10, marginLeft: 5,  }}>
+     <View style={{ backgroundColor: 'white',}}>
+         <View style={{ marginBottom: 12,marginTop: 10, marginLeft: 5,  }}>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={{marginLeft: 4, marginRight: 4,  width: 54, height: 54, backgroundColor: '#D4E4F4', borderRadius: 50, alignItems: "center", justifyContent: "center", alignItems: 'center' }}>
           <Ionicons name="add" size={30} color="#0078E9" style={{marginLeft:2}}/>

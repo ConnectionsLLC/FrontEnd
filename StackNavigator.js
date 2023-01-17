@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, Settings } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from './screens/HomeScreen';
@@ -14,6 +14,9 @@ import ProfileNavigaton from './Navigation/ProfileNavigation';
 import { BlurView } from 'expo-blur';
 import ChatNavigation from './Navigation/ChatNavigation';
 import { getFocusedRouteNameFromRoute, useNavigation, useRoute } from '@react-navigation/native';
+import Shorts from './screens/Shorts';
+import Notifications from './screens/Notifications';
+
 
 
 const Stack = createBottomTabNavigator();
@@ -45,35 +48,49 @@ const StackNavigator = () => {
               ? 'home'
               : 'home-outline';
             iconColor = focused
-              ? 'black'
-              : "black"
+              ? '#0078E9'
+              : "grey"
           } else if (route.name === 'Profile') {
 
             iconName = focused ? 'person' : 'person-outline';
             iconColor = focused
-              ? 'black'
-              : "black"
+              ? '#0078E9'
+              : "grey"
           }
           else if (route.name === 'Chat') {
 
             iconName = focused ? 'chatbubble' : 'chatbubble-outline';
             iconColor = focused
-              ? 'black'
-              : "black"
+              ? '#0078E9'
+              : "grey"
           }
           else if (route.name === 'Login') {
 
             iconName = focused ? 'person' : 'person-outline';
             iconColor = focused
-              ? 'black'
+              ? '#0078E9'
               : "black"
           }
           else if (route.name === 'Signup') {
 
             iconName = focused ? 'person-add' : 'person-add-outline';
             iconColor = focused
-              ? 'black'
+              ? '#0078E9'
               : "black"
+          }
+          else if (route.name === 'Shorts') {
+
+            iconName = focused ? 'play-circle' : 'play-circle-outline';
+            iconColor = focused
+              ? '#0078E9'
+              : "grey"
+          }
+          else if (route.name === 'Notifications') {
+
+            iconName = focused ? 'notifications' : 'notifications-outline';
+            iconColor = focused
+              ? '#0078E9'
+              : "grey"
           }
          
 
@@ -90,7 +107,10 @@ const StackNavigator = () => {
               <>
           <Stack.Screen name="Home" component={HomeNavigation}  />
           <Stack.Screen name="Chat" component={ChatNavigation} />
+          <Stack.Screen name="Shorts" component={Shorts} />
+          <Stack.Screen name="Notifications" component={Notifications} />
           <Stack.Screen name="Profile" component={ProfileNavigaton} />
+  
 
          
           </>

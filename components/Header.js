@@ -17,8 +17,8 @@ const Header = () => {
     <View style={{backgroundColor: 'white'}}>
       <View style={styles.container}>
         <TouchableOpacity>
-          {/* <Image style={styles.logo} source={{ uri: 'https://th.bing.com/th/id/R.cd2b3b973a2d0abae68440b004408162?rik=sK9pHDx0a7m7jg&riu=http%3a%2f%2f2.bp.blogspot.com%2f-4pBaE9sDqjg%2fUYNzlT_tL9I%2fAAAAAAAAZck%2fPhzqPJx3le8%2fs1600%2fInstragram%2blogo.png&ehk=ZOXB2HBBimcrm%2fakCFvwsTMuHJbNdmNGO57a%2bem5nlc%3d&risl=&pid=ImgRaw&r=0' }} /> */}
-          <Text style={{ fontSize: 20, fontWeight: '500', }} onPress={() => firebase.auth().signOut()}>{route.name}</Text>
+          <Image style={styles.logo} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png' }} onPress={() => firebase.auth().signOut()}/>
+          {/* <Text style={{ fontSize: 20, fontWeight: '500', }} onPress={() => firebase.auth().signOut()}>{route.name}</Text> */}
         </TouchableOpacity>
         <View style={styles.iconsContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('Plus')}>
@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
 
   },
   logo: {
-    width: 100,
-    height: 50,
-    resizeMode: 'contain',
+    width: 110,
+    height: 35,
+    
   },
   iconsContainer: {
     flexDirection: 'row',
