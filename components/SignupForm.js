@@ -22,14 +22,20 @@ const SignupForm = ({ navigation }) => {
           try {
            const authUser = await firebase.auth().createUserWithEmailAndPassword(email, password)
            console.log("Success")
-            firebase.firestore().collection('users').doc(authUser.user.email).set({
-            owner_uid: authUser.user.uid,
-            username: username, 
-            email: authUser.user.email, 
-            profile_picture: 'https://icon-library.com/images/default-user-icon/default-user-icon-8.jpg',
-            lowerUsername: "@"+username.replace(/\s+/g, '').toLowerCase(), 
-            about: 'Hey there I am using Social',
-            })
+           fetch('https://social-backend-three.vercel.app/signup', {
+            method: 'POST', 
+            headers: {
+              "Content-Type": 'application/json'
+            }, 
+            body: JSON.stringify({email: email, username: username, password: password})
+           })
+           .then(res => res.json()).then(
+            data => {
+              if(data.message === "User Registered Successfully!"){
+                console.log("Credentials stored in database")
+              }
+            }
+           )
           } catch(error) {
         console.log(error.message)
           }

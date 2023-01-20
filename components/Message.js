@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Feather } from "@expo/vector-icons";
 
 
 const Message = () => {
+
+  const route = useRoute();
+  const { username, lowerUsername, profile } = route.params;
   const navigation = useNavigation()
   
   navigation.setOptions({tabBarVisible: false});
@@ -20,12 +23,12 @@ const Message = () => {
         <View>
           <Image
             style={{ width: 38, height: 38, borderRadius: 50, }}
-            source={{ uri: 'https://th.bing.com/th/id/OIP.0HPHOhiMHVdQGlxYc4z86AHaFj?pid=ImgDet&rs=1' }}
+            source={{ uri: profile }}
           />
         </View>
         <View style={{ marginLeft: 6, flex: 1 }}>
-          <Text style={{ fontSize: 14 }}>Elon Musk</Text>
-          <Text style={{ fontSize: 12, color: 'grey' }}>@elonmusk</Text>
+          <Text style={{ fontSize: 14 }}>{username}</Text>
+          <Text style={{ fontSize: 12, color: 'grey' }}>{lowerUsername}</Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <TouchableOpacity>
@@ -58,12 +61,12 @@ const Message = () => {
           
         </ScrollView>
       </View>
-      <View style={{ flexDirection: 'row', alignItems: 'center', padding: 9, marginTop: 3,borderTopWidth: 1, borderTopColor: 'grey'}}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', padding: 9, marginTop: 3}}>
         <TouchableOpacity>
           <Feather name="smile" size={22} color="grey" />
         </TouchableOpacity>
         
-        <TextInput placeholder="Say Something...." style={{ flex: 1, marginRight: 6, marginLeft: 6 }} />
+        <TextInput placeholder="Say Something...." style={{ flex: 1, marginRight: 6, marginLeft: 6, backgroundColor: '#D6D6D6', padding: 3, paddingLeft: 4, paddingRight: 4, borderRadius: 6 }} />
         <TouchableOpacity style={{ marginRight: 4 }}>
           <Feather name="paperclip" size={22} color="grey" />
         </TouchableOpacity>

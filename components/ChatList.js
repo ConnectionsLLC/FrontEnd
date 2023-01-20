@@ -32,7 +32,7 @@ const ChatList = () => {
       <View style={{ margin: 4, marginLeft: 10,  }}>
         <Text style={{color: 'grey', fontSize: 15}}>Pinned</Text>
       </View>
-      <TouchableOpacity style={{ padding: 8, borderRadius: 9, marginLeft: 4, marginRight: 4, flexDirection: 'row', alignItems: 'center',  }}>
+      <TouchableOpacity onPress={() => navigation.navigate('Message',{username: 'Elon Musk', profile: 'https://th.bing.com/th/id/OIP.0HPHOhiMHVdQGlxYc4z86AHaFj?pid=ImgDet&rs=1', lowerUsername: '@elonmusk'})} style={{ padding: 8, borderRadius: 9, marginLeft: 4, marginRight: 4, flexDirection: 'row', alignItems: 'center',  }}>
         <View>
           <Image
             style={{ width: 50, height: 50, borderRadius: 50, }}
@@ -40,7 +40,7 @@ const ChatList = () => {
           />
         </View>
         <View style={{ marginLeft: 4, flex: 1 }}>
-          <Text style={{ fontSize: 16, fontWeight: '700' }}>Elon Musk</Text>
+          <Text style={{ fontSize: 15, fontWeight: '700' }}>Elon Musk</Text>
           <View style={{ alignItems: 'center',flexDirection: 'row',  }}>
             <View style={{ flexDirection: 'row', alignItems: 'center',width: 200  }}>
               <Text numberOfLines={1} style={{ fontSize: 12, color: 'grey', }}>Hey elon here, what about making the users pay for the verified ticks ?? </Text>
@@ -59,7 +59,9 @@ const ChatList = () => {
       <View style={{ margin: 4, marginLeft: 10 }}>
         <Text style={{color: 'grey', fontSize: 15}}>Other</Text>
       </View>
-      <TouchableOpacity style={{ padding: 8, borderRadius: 9, marginLeft: 4, flexDirection: 'row', alignItems: 'center' }}>
+
+
+      <TouchableOpacity onPress={() => navigation.navigate('Message', {username: 'Mark Zuckerberg', profile: 'https://specials-images.forbesimg.com/imageserve/5c76b7d331358e35dd2773a9/416x416.jpg?background=000000&cropX1=0&cropX2=4401&cropY1=0&cropY2=4401', lowerUsername: '@markzuckerberg'})} style={{ padding: 8, borderRadius: 9, marginLeft: 4, flexDirection: 'row', alignItems: 'center' }}>
         <View>
           <Image
             style={{ width: 50, height: 50, borderRadius: 50, }}
@@ -67,7 +69,7 @@ const ChatList = () => {
           />
         </View>
         <View style={{ marginLeft: 4, flex: 1 }}>
-          <Text style={{ fontSize: 16, fontWeight: '700' }}>Mark Zuckerberg</Text>
+          <Text style={{ fontSize: 15, fontWeight: '700' }}>Mark Zuckerberg</Text>
           <View style={{ alignItems: 'center',flexDirection: 'row',  }}>
             <View style={{ flexDirection: 'row', alignItems: 'center',width: 200  }}>
               <Text numberOfLines={1} style={{ fontSize: 12, color: 'grey',  }}>Biddng for 20 Billion!</Text>
@@ -82,7 +84,8 @@ const ChatList = () => {
             </View>
            </View>
       </TouchableOpacity>
-      <TouchableOpacity style={{ padding: 8, borderRadius: 9, marginLeft: 4, flexDirection: 'row', alignItems: 'center' }}>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Message',{ username: 'Bill Gates', profile: 'https://specials-images.forbesimg.com/imageserve/62d599ede3ff49f348f9b9b4/416x416.jpg?background=000000&cropX1=155&cropX2=976&cropY1=340&cropY2=1161', lowerUsername: '@billgates'})} style={{ padding: 8, borderRadius: 9, marginLeft: 4, flexDirection: 'row', alignItems: 'center' }}>
         <View>
           <Image
             style={{ width: 50, height: 50, borderRadius: 50, }}
@@ -90,7 +93,7 @@ const ChatList = () => {
           />
         </View>
         <View style={{ marginLeft: 4, flex: 1 }}>
-          <Text style={{ fontSize: 16, fontWeight: '700' }}>Bill Gates</Text>
+          <Text style={{ fontSize: 15, fontWeight: '700' }}>Bill Gates</Text>
           <View style={{ alignItems: 'center',flexDirection: 'row',  }}>
             <View style={{ flexDirection: 'row', alignItems: 'center',width: 200}}>
               <Text numberOfLines={1} style={{ fontSize: 12, color: 'grey',  }}>Take my Funding</Text>

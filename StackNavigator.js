@@ -26,7 +26,7 @@ const StackNavigator = () => {
   const { user } = useAuth()
   const navigation = useNavigation()
   
-  
+ 
   return (
 
     
@@ -41,6 +41,7 @@ const StackNavigator = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           let iconColor;
+          let iconSize = 24
           
           if (route.name === 'Home') {
 
@@ -79,14 +80,15 @@ const StackNavigator = () => {
               : "black"
           }
           else if (route.name === 'Shorts') {
-
+            iconSize = 28
             iconName = focused ? 'play-circle' : 'play-circle-outline';
             iconColor = focused
-              ? '#0078E9'
+              ? '#FF7134'
               : "grey"
+            
           }
           else if (route.name === 'Notifications') {
-
+            
             iconName = focused ? 'notifications' : 'notifications-outline';
             iconColor = focused
               ? '#0078E9'
@@ -95,7 +97,7 @@ const StackNavigator = () => {
          
 
           // You can return any component that you like here!
-          return <Ionicons name={iconName} size={24} color={iconColor} />;
+          return <Ionicons name={iconName} size={iconSize} color={iconColor} />;
           ;
         },
         tabBarActiveTintColor: 'blue',

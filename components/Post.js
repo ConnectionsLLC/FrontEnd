@@ -110,9 +110,6 @@ const PostHeader = ({ post, navigation, follower, following, userInfo }) => (
               username: post.username,
               lowerUsername: post.lowerUsername,
               profile: post.profilePicture,
-              uid: post.owner_uid,
-              follower: follower,
-              following: following,
               email: post.owner_email,
 
             })
@@ -261,57 +258,8 @@ const PostFooter = ({
         <Ionicons name="chatbubble-outline" size={21} color="black" />
         <Text style={{ marginLeft: 4, fontSize: 16 }}>0 </Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity style={{ flexDirection: "row" }} onPress={() => { setReplyModal(true); setPostInfo(post)}}>
-        <Octicons name="reply" size={24} color="black" />
-      </TouchableOpacity> */}
-
-      {/* <TouchableOpacity style={{ flexDirection: "row" }}>
-        <Feather name="share" size={24} color="black" />
-      </TouchableOpacity> */}
+     
     </View>
-
-
-    {/* {comments == true && (
-      <View style={{ marginTop: 10, width: "100%", }}>
-        {post.comments.map((comment, index) => (
-
-          <View style={{ flexDirection: "row", marginBottom: 4 }}>
-            <Image
-              style={{ width: 24, height: 24, borderRadius: 50, marginLeft: 4 }}
-              source={{ uri: post.profilePicture }}
-            />
-            <View>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Text style={{ marginLeft: 4 }}>Aniket Mishra </Text>
-                  <Text >  |  </Text>
-                  <Text style={{ marginRight: 4, fontSize: 12 }}>10 min ago</Text>
-                </View>
-
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginLeft: 4,
-                }}
-              >
-                <Text style={{ fontSize: 12, fontWeight: '100' }}>Replying to </Text>
-                <Text style={{ fontSize: 12, color: "blue" }}>@aniketmishra</Text>
-              </View>
-
-              <Text style={{ marginLeft: 4 }}>{comment.replyText}</Text>
-            </View>
-          </View>
-        ))}
-
-      </View>
-
-
-    )} */}
-
-
-
   </View>
 );
 const styles = StyleSheet.create({

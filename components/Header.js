@@ -4,6 +4,7 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 import firebase from '../firebase';
 import { useRoute } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // import  PlusIcon  from "react-native-heroicons/outline";
 
@@ -11,13 +12,21 @@ const Header = () => {
   const navigation = useNavigation()
   const route = useRoute();
   
-
+const logout = () => {
+   
+  const remove = async () => {
+    await AsyncStorage.removeItem("email")
+  await AsyncStorage.removeItem("password")
+  }
+  remove()
+  firebase.auth().signOut()
+}
 
   return (
     <View style={{backgroundColor: 'white'}}>
       <View style={styles.container}>
-        <TouchableOpacity>
-          <Image style={styles.logo} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png' }} onPress={() => firebase.auth().signOut()}/>
+        <TouchableOpacity onPress={logout}>
+          <Image style={styles.logo} source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png' }} />
           {/* <Text style={{ fontSize: 20, fontWeight: '500', }} onPress={() => firebase.auth().signOut()}>{route.name}</Text> */}
         </TouchableOpacity>
         <View style={styles.iconsContainer}>
@@ -26,7 +35,7 @@ const Header = () => {
             {/* <PlusIcon/> */}
             {/* <Camera/> */}
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
             <View style={styles.unreadBadge}>
               <Text style={styles.unreadText}>12</Text>
             </View>
