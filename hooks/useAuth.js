@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
 
 const [userInfo, setUserInfo] = useState([])
 const [temp, setTemp] = useState(null)
-const [currentUser, setCurrentUser] = useState("asdf")
+const [currentUser, setCurrentUser] = useState('asdf')
 
 
 
@@ -37,8 +37,8 @@ const persistence = async () => {
     
   useEffect(
     () => {
-      persistence().then(async () => {
-        await firebase.auth().onAuthStateChanged(user => userHandler(user))
+      persistence().then( () => {
+       firebase.auth().onAuthStateChanged(user => userHandler(user))
       })
      
     },
